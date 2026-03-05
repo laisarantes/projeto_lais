@@ -24,7 +24,7 @@
             overflow-x: hidden;
         }
 
-        /* NAVBAR */
+        /* ===================== NAVBAR ===================== */
         nav {
             position: fixed;
             top: 0;
@@ -34,10 +34,30 @@
             justify-content: space-between;
             align-items: center;
             z-index: 1000;
-            transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.6s ease, background 0.4s;
+            transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.6s ease, background 0.4s, padding 0.4s;
         }
-        nav.scrolled { background: rgba(0,0,0,0.95); backdrop-filter: blur(15px); padding: 15px 10%; }
+        nav.scrolled {
+            background: rgba(0,0,0,0.95);
+            backdrop-filter: blur(15px);
+            padding: 15px 10%;
+        }
+        nav.nav-hidden {
+            transform: translateY(-100%);
+            opacity: 0;
+            pointer-events: none;
+        }
 
+        .logo-lais {
+            font-weight: 900;
+            font-size: 1.5rem;
+            letter-spacing: -1px;
+            font-style: italic;
+            text-transform: uppercase;
+            z-index: 1001;
+            position: relative;
+        }
+
+        /* Desktop nav links */
         .nav-links-container {
             display: flex;
             align-items: center;
@@ -51,20 +71,127 @@
             pointer-events: auto;
             transform: translateY(0);
         }
-        nav.nav-hidden {
-            transform: translateY(-100%);
-            opacity: 0;
-            pointer-events: none;
+
+        .nav-link {
+            position: relative;
+            color: white;
+            margin-left: 25px;
+            font-weight: 400;
+            text-transform: uppercase;
+            font-size: 0.75rem;
+            letter-spacing: 2px;
+            transition: 0.3s;
+            text-decoration: none;
         }
-
-        .logo-lais { font-weight: 900; font-size: 1.5rem; letter-spacing: -1px; font-style: italic; text-transform: uppercase; }
-
-        .nav-link { position: relative; color: white; margin-left: 25px; font-weight: 400; text-transform: uppercase; font-size: 0.75rem; letter-spacing: 2px; transition: 0.3s; }
-        .nav-link::after { content: ''; position: absolute; width: 0; height: 1px; bottom: -5px; left: 0; background-color: #f80afc; transition: width 0.3s ease; }
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 1px;
+            bottom: -5px;
+            left: 0;
+            background-color: #f80afc;
+            transition: width 0.3s ease;
+        }
         .nav-link:hover::after { width: 100%; }
         .nav-link:hover { color: #f80afc; }
 
-        /* HERO */
+        /* ===================== HAMBURGER ===================== */
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            width: 44px;
+            height: 44px;
+            cursor: pointer;
+            z-index: 1100;
+            position: relative;
+            background: none;
+            border: none;
+            padding: 0;
+        }
+        .hamburger span {
+            display: block;
+            width: 26px;
+            height: 2px;
+            background: white;
+            border-radius: 2px;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            transform-origin: center;
+        }
+        .hamburger span:not(:last-child) { margin-bottom: 6px; }
+
+        .hamburger.open span:nth-child(1) {
+            transform: translateY(8px) rotate(45deg);
+            background: #f80afc;
+        }
+        .hamburger.open span:nth-child(2) {
+            opacity: 0;
+            transform: scaleX(0);
+        }
+        .hamburger.open span:nth-child(3) {
+            transform: translateY(-8px) rotate(-45deg);
+            background: #f80afc;
+        }
+
+        /* ===================== MOBILE MENU ===================== */
+        .mobile-menu {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.97);
+            backdrop-filter: blur(20px);
+            z-index: 1050;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.4s ease;
+        }
+        .mobile-menu.open {
+            opacity: 1;
+            pointer-events: auto;
+        }
+        .mobile-menu a {
+            display: block;
+            font-size: 2rem;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            color: white;
+            text-decoration: none;
+            padding: 16px 0;
+            transform: translateY(30px);
+            opacity: 0;
+            transition: color 0.3s, transform 0.5s ease, opacity 0.5s ease;
+        }
+        .mobile-menu.open a {
+            transform: translateY(0);
+            opacity: 1;
+        }
+        .mobile-menu.open a:nth-child(1) { transition-delay: 0.05s; }
+        .mobile-menu.open a:nth-child(2) { transition-delay: 0.1s; }
+        .mobile-menu.open a:nth-child(3) { transition-delay: 0.15s; }
+        .mobile-menu.open a:nth-child(4) { transition-delay: 0.2s; }
+        .mobile-menu.open a:nth-child(5) { transition-delay: 0.25s; }
+        .mobile-menu.open a:nth-child(6) { transition-delay: 0.3s; }
+        .mobile-menu a:hover { color: #f80afc; }
+        .mobile-menu .mobile-whatsapp {
+            margin-top: 30px;
+            padding: 14px 40px;
+            border: 1px solid #f80afc;
+            color: #f80afc !important;
+            font-size: 0.8rem !important;
+            transition: background 0.3s, color 0.3s !important;
+        }
+        .mobile-menu .mobile-whatsapp:hover {
+            background: #f80afc !important;
+            color: white !important;
+        }
+
+        /* ===================== HERO ===================== */
         .hero {
             height: 100vh;
             width: 100%;
@@ -78,19 +205,56 @@
             text-align: center;
             z-index: 1;
         }
-        .hero::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to bottom, rgba(0,0,0,.4), rgba(0,0,0,.95)); }
-        .hero-content { position: relative; z-index: 2; }
-        .hero h1 { font-size: clamp(3rem,8vw,6rem); font-weight: 900; letter-spacing: 4px; }
+        .hero::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to bottom, rgba(0,0,0,.4), rgba(0,0,0,.95));
+        }
+        .hero-content { position: relative; z-index: 2; padding: 0 20px; }
+        .hero h1 {
+            font-size: clamp(2.2rem, 8vw, 6rem);
+            font-weight: 900;
+            letter-spacing: 4px;
+        }
 
-        .main-content { position: relative; z-index: 10; background: #0f0f0f; margin-top: 100vh; }
+        .main-content {
+            position: relative;
+            z-index: 10;
+            background: #0f0f0f;
+            margin-top: 100vh;
+        }
 
-        .btn { display: inline-block; margin-top: 40px; padding: 14px 40px; border: 1px solid #f80afc; color: #f80afc; font-weight: 600; letter-spacing: 2px; transition: .4s; text-transform: uppercase; font-size: 0.8rem; }
-        .btn:hover { background: #f80afc; color: white; transform: translateY(-4px); box-shadow: 0 0 30px rgba(248, 10, 252, 0.4); }
+        .btn {
+            display: inline-block;
+            margin-top: 40px;
+            padding: 14px 40px;
+            border: 1px solid #f80afc;
+            color: #f80afc;
+            font-weight: 600;
+            letter-spacing: 2px;
+            transition: .4s;
+            text-transform: uppercase;
+            font-size: 0.8rem;
+            text-decoration: none;
+        }
+        .btn:hover {
+            background: #f80afc;
+            color: white;
+            transform: translateY(-4px);
+            box-shadow: 0 0 30px rgba(248, 10, 252, 0.4);
+        }
 
-        section { padding: 100px 10%; position: relative; }
-        .section-title { font-size: 2.5rem; font-weight: 900; margin-bottom: 60px; text-transform: uppercase; letter-spacing: 2px; }
+        section { padding: 80px 10%; position: relative; }
+        .section-title {
+            font-size: clamp(1.8rem, 4vw, 2.5rem);
+            font-weight: 900;
+            margin-bottom: 60px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
 
-        /* CARD SOBRE */
+        /* ===================== ABOUT ===================== */
         .about-container {
             display: flex;
             gap: 60px;
@@ -99,10 +263,11 @@
         }
 
         .card-sobre {
-            width: 350px;
-            height: 450px;
+            width: 320px;
+            height: 420px;
             perspective: 1000px;
             cursor: pointer;
+            flex-shrink: 0;
         }
 
         .card-inner-sobre {
@@ -113,7 +278,6 @@
             transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
             transform-style: preserve-3d;
         }
-
         .card-sobre:hover .card-inner-sobre { transform: rotateY(180deg); }
 
         .card-front-sobre, .card-back-sobre {
@@ -125,7 +289,6 @@
             border-radius: 12px;
             overflow: hidden;
         }
-
         .card-front-sobre { background: #1a1a1a; }
         .card-front-sobre img { width: 100%; height: 100%; object-fit: cover; transition: 0.5s; }
 
@@ -141,55 +304,82 @@
             border: 1px solid #f80afc;
         }
 
-        /* STACKS */
+        /* ===================== STACKS ===================== */
         .stack-bubble {
-            width: 120px; height: 120px; border-radius: 50%;
-            background: #151515; border: 1px solid rgba(255, 255, 255, 0.05);
-            display: flex; flex-direction: column; align-items: center; justify-content: center;
+            width: 110px;
+            height: 110px;
+            border-radius: 50%;
+            background: #151515;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
             transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            cursor: pointer; opacity: 0; transform: scale(0.5);
+            cursor: pointer;
+            opacity: 0;
+            transform: scale(0.5);
         }
         .stack-bubble.show { opacity: 1; transform: scale(1); }
-        .stack-bubble:hover { transform: scale(1.15) translateY(-10px); border-color: #f80afc; box-shadow: 0 0 30px rgba(248, 10, 252, 0.3); }
+        .stack-bubble:hover {
+            transform: scale(1.15) translateY(-10px);
+            border-color: #f80afc;
+            box-shadow: 0 0 30px rgba(248, 10, 252, 0.3);
+        }
 
-        /* GALERIA HORIZONTAL */
+        /* ===================== GALERIA HORIZONTAL ===================== */
         .horizontal-scroll-container { height: 400vh; position: relative; }
         .sticky-wrapper {
-            position: sticky; top: 0; height: 100vh; overflow: hidden;
-            display: flex; flex-direction: column; justify-content: center;
+            position: sticky;
+            top: 0;
+            height: 100vh;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
         }
-        .gallery-track { display: flex; will-change: transform; padding-left: 10%; }
+        .gallery-track {
+            display: flex;
+            will-change: transform;
+            padding-left: 10%;
+        }
 
         .gallery-item {
-            min-width: 450px; height: 60vh; margin-right: 80px;
-            position: relative; perspective: 1000px; opacity: 0;
+            min-width: 420px;
+            height: 58vh;
+            margin-right: 60px;
+            position: relative;
+            perspective: 1000px;
+            opacity: 0;
             transform: translateY(40px) scale(0.8);
             transition: transform 0.6s cubic-bezier(0.1, 0.1, 0.1, 1), opacity 0.8s ease;
+            flex-shrink: 0;
         }
         .gallery-item.active { opacity: 1; transform: translateY(0) scale(1); }
 
         .card-inner {
-            position: relative; width: 100%; height: 100%;
+            position: relative;
+            width: 100%;
+            height: 100%;
             transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
             transform-style: preserve-3d;
         }
         .gallery-item:hover .card-inner { transform: rotateY(180deg); }
 
         .card-front, .card-back {
-            position: absolute; width: 100%; height: 100%;
-            backface-visibility: hidden; border-radius: 8px; overflow: hidden;
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            border-radius: 8px;
+            overflow: hidden;
         }
-
-        .card-front {
-            filter: brightness(0.8);
-            transition: filter 0.6s ease;
-        }
-        .gallery-item.active .card-front, .gallery-item:hover .card-front {
-            filter: brightness(1);
-        }
+        .card-front { filter: brightness(0.8); transition: filter 0.6s ease; }
+        .gallery-item.active .card-front,
+        .gallery-item:hover .card-front { filter: brightness(1); }
 
         .card-back {
-            background: #111; 
+            background: #111;
             transform: rotateY(180deg);
             padding: 0;
             border: 1px solid #f80afc;
@@ -197,27 +387,72 @@
         }
         .card-front img, .card-back img { width: 100%; height: 100%; object-fit: cover; }
 
-        .item-info-front { position: absolute; bottom: 30px; left: 30px; z-index: 5; }
-        .item-info-front h3 { font-size: 1.5rem; font-weight: 900; text-transform: uppercase; color: #f80afc; text-shadow: 0 2px 10px rgba(0,0,0,0.5); }
+        .item-info-front { position: absolute; bottom: 25px; left: 25px; z-index: 5; }
+        .item-info-front h3 {
+            font-size: 1.4rem;
+            font-weight: 900;
+            text-transform: uppercase;
+            color: #f80afc;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.5);
+        }
 
-        /* SEÇÃO DECK */
+        /* ===================== MOBILE GALERIA ===================== */
+        .mobile-gallery {
+            display: none;
+            padding: 60px 5%;
+        }
+        .mobile-gallery-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+        }
+        .mobile-gallery-item {
+            border-radius: 8px;
+            overflow: hidden;
+            aspect-ratio: 3/4;
+            position: relative;
+        }
+        .mobile-gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .mobile-gallery-item-label {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 12px;
+            background: linear-gradient(to top, rgba(0,0,0,0.9), transparent);
+            font-size: 0.65rem;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: #f80afc;
+        }
+
+        /* ===================== DECK ===================== */
         .deck-section {
-            min-height: 120vh;
+            min-height: 100vh;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
             background: #0f0f0f;
             overflow: hidden;
+            padding: 80px 5%;
         }
         .deck-container {
             position: relative;
-            width: 300px; height: 450px;
-            margin-top: 50px; cursor: pointer;
+            width: 440px;
+            height: 400px;
+            margin-top: 40px;
+            cursor: pointer;
         }
         .deck-card {
             position: absolute;
-            width: 100%; height: 100%;
+            width: 100%;
+            height: 100%;
             border-radius: 15px;
             background: transparent;
             border: 1px solid rgba(255, 255, 255, 0.1);
@@ -227,7 +462,8 @@
             box-shadow: 0 10px 30px rgba(0,0,0,0.5);
         }
         .deck-card img {
-            width: 100%; height: 100%;
+            width: 100%;
+            height: 100%;
             object-fit: cover;
             opacity: 0.6;
             transition: 0.6s ease;
@@ -248,51 +484,173 @@
         .deck-card.focused img { opacity: 1; }
 
         .deck-hint {
-            margin-top: 40px; font-size: 0.7rem; letter-spacing: 3px;
-            text-transform: uppercase; color: #f80afc; animation: pulse 2s infinite;
+            margin-top: 40px;
+            font-size: 0.7rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: #f80afc;
+            animation: pulse 2s infinite;
         }
         @keyframes pulse { 0%, 100% { opacity: 0.4; } 50% { opacity: 1; } }
 
+        /* ===================== MISC ===================== */
         .fade-up { opacity: 0; transform: translateY(40px); transition: all 1s ease-out; }
         .fade-up.active { opacity: 1; transform: translateY(0); }
 
-        .parallax { height: 60vh; background: url('img/parallax.png') center/cover fixed; display: flex; align-items: center; justify-content: center; }
-        footer { padding: 60px 10%; background: #080808; border-top: 1px solid #1a1a1a; text-align: center; }
+        .parallax {
+            height: 50vh;
+            background: url('img/parallax.png') center/cover fixed;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        footer {
+            padding: 60px 10%;
+            background: #080808;
+            border-top: 1px solid #1a1a1a;
+            text-align: center;
+        }
+
+        /* ===================== RESPONSIVE ===================== */
+        @media (max-width: 1024px) {
+            nav { padding: 18px 6%; }
+            nav.scrolled { padding: 14px 6%; }
+            section { padding: 70px 6%; }
+        }
 
         @media (max-width: 768px) {
-            .gallery-item { min-width: 85vw; height: 50vh; margin-right: 30px; }
-            .deck-container { width: 220px; height: 330px; }
-            .deck-container.open .deck-card:nth-child(1) { transform: rotate(-10deg) translateX(-60px); }
-            .deck-container.open .deck-card:nth-child(2) { transform: rotate(-5deg) translateX(-30px); }
-            .deck-container.open .deck-card:nth-child(4) { transform: rotate(5deg) translateX(30px); }
-            .deck-container.open .deck-card:nth-child(5) { transform: rotate(10deg) translateX(60px); }
+            /* Show hamburger, hide desktop nav */
+            .hamburger { display: flex; }
+            .mobile-menu { display: flex; }
+            .nav-links-container { display: none !important; }
+
+            nav { padding: 16px 5%; }
+            nav.scrolled { padding: 12px 5%; }
+
+            .logo-lais { font-size: 1.2rem; }
+
+            section { padding: 60px 5%; }
+            .section-title { margin-bottom: 40px; }
+
+            /* About */
+            .about-container {
+                flex-direction: column;
+                gap: 40px;
+                align-items: flex-start;
+            }
+            .card-sobre {
+                width: 100%;
+                max-width: 340px;
+                height: 380px;
+                margin: 0 auto;
+            }
+
+            /* Stacks */
+            #stacks-container {
+                grid-template-columns: repeat(3, 1fr) !important;
+                gap: 16px !important;
+            }
+            .stack-bubble {
+                width: 90px;
+                height: 90px;
+            }
+
+            /* Hide desktop horizontal gallery, show mobile grid */
+            .horizontal-scroll-container { display: none; }
+            .mobile-gallery { display: block; }
+
+            /* Deck */
+            .deck-container {
+                width: 240px;
+                height: 340px;
+            }
+            .deck-container.open .deck-card:nth-child(1) { transform: rotate(-12deg) translateX(-70px); }
+            .deck-container.open .deck-card:nth-child(2) { transform: rotate(-6deg) translateX(-35px); }
+            .deck-container.open .deck-card:nth-child(3) { transform: rotate(0deg) translateX(0); }
+            .deck-container.open .deck-card:nth-child(4) { transform: rotate(6deg) translateX(35px); }
+            .deck-container.open .deck-card:nth-child(5) { transform: rotate(12deg) translateX(70px); }
+
+            .parallax {
+                background-attachment: scroll;
+                height: 40vh;
+            }
+
+            footer { padding: 40px 5%; }
+        }
+
+        @media (max-width: 480px) {
+            .hero h1 { letter-spacing: 2px; }
+
+            #stacks-container {
+                grid-template-columns: repeat(2, 1fr) !important;
+            }
+            .stack-bubble {
+                width: 100px;
+                height: 100px;
+            }
+
+            .mobile-gallery-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .deck-container {
+                width: 200px;
+                height: 290px;
+            }
+            .deck-container.open .deck-card:nth-child(1) { transform: rotate(-10deg) translateX(-55px); }
+            .deck-container.open .deck-card:nth-child(2) { transform: rotate(-5deg) translateX(-27px); }
+            .deck-container.open .deck-card:nth-child(4) { transform: rotate(5deg) translateX(27px); }
+            .deck-container.open .deck-card:nth-child(5) { transform: rotate(10deg) translateX(55px); }
         }
     </style>
 </head>
 
 <body>
 
+<!-- ===================== NAVBAR ===================== -->
 <nav id="navbar">
-    <div class="logo-lais">LAÍS ARANTES<span class="text-[#f80afc]">.</span></div>
+    <div class="logo-lais">LAÍS ARANTES<span style="color:#f80afc">.</span></div>
+
+    <!-- Desktop links -->
     <div class="nav-links-container" id="nav-links">
         <a href="#about" class="nav-link">Sobre</a>
         <a href="#skills" class="nav-link">Stacks</a>
-        <a href="#galeria" class="nav-link">Galeria</a>
-        <a href="#deck" class="nav-link">Mood</a>
+        <a href="#galeria" class="nav-link">Eventos</a>
+        <a href="#deck" class="nav-link">Projetos</a>
         <a href="#contact" class="nav-link">Contato</a>
-        <a href="https://wa.me/5511982473573" target="_blank" class="ml-6 px-4 py-2 border border-[#f80afc] text-[#f80afc] text-[10px] font-black uppercase tracking-widest hover:bg-[#f80afc] hover:text-white transition">WhatsApp</a>
+        <a href="https://wa.me/5511982473573" target="_blank" class="ml-6 px-4 py-2 border border-[#f80afc] text-[#f80afc] text-[10px] font-black uppercase tracking-widest hover:bg-[#f80afc] hover:text-white transition" style="text-decoration:none;">WhatsApp</a>
     </div>
+
+    <!-- Hamburger button -->
+    <button class="hamburger" id="hamburger" aria-label="Menu">
+        <span></span>
+        <span></span>
+        <span></span>
+    </button>
 </nav>
 
+<!-- Mobile full-screen menu -->
+<div class="mobile-menu" id="mobile-menu">
+    <a href="#about" class="mobile-nav-link">Sobre</a>
+    <a href="#skills" class="mobile-nav-link">Stacks</a>
+    <a href="#galeria-mobile" class="mobile-nav-link">Eventos</a>
+    <a href="#deck" class="mobile-nav-link">Projetos</a>
+    <a href="#contact" class="mobile-nav-link">Contato</a>
+    <a href="https://wa.me/5511982473573" target="_blank" class="mobile-whatsapp">WhatsApp</a>
+</div>
+
+<!-- ===================== HERO ===================== -->
 <section class="hero" id="hero-trigger">
     <div class="hero-content fade-up active">
         <h1>PORTFOLIO</h1>
-        <p class="font-light tracking-[6px] uppercase text-xs opacity-70">Full Stack Developer • 2026</p>
+        <p style="font-weight:300; letter-spacing:6px; text-transform:uppercase; font-size:0.7rem; opacity:0.7; margin-top:12px;">Full Stack Developer • 2026</p>
         <a href="https://wa.me/5511982473573" target="_blank" class="btn">Contato</a>
     </div>
 </section>
 
 <div class="main-content">
+
+    <!-- ===================== SOBRE ===================== -->
     <section id="about">
         <div class="about-container">
             <div class="card-sobre fade-up">
@@ -301,119 +659,163 @@
                         <img src="img/parallax.png" alt="Laís Arantes" onerror="this.src='https://picsum.photos/400/600?grayscale&sig=1'">
                     </div>
                     <div class="card-back-sobre">
-                        <h3>Sobre</h3>
-                        <p class="text-sm opacity-80 leading-relaxed">
+                        <h3 style="font-size:1.5rem; font-weight:900; margin-bottom:16px;">Sobre</h3>
+                        <p style="font-size:0.85rem; opacity:0.8; line-height:1.7;">
                             Apaixonada por tecnologia e design, busco sempre o equilíbrio entre a estética e a performance. Minha meta é transformar códigos em experiências memoráveis.
                         </p>
                     </div>
                 </div>
             </div>
 
-            <div class="flex-1 min-w-[300px]">
-                <h2 class="section-title fade-up !mb-8">Sobre mim</h2>
-                <p class="max-w-[800px] text-lg font-light opacity-70 leading-relaxed fade-up">
-                    Olá, me chamo Laís. Sou <strong>Desenvolvedora Full Stack especialista em portfólios premiuns</strong>.
+            <div style="flex:1; min-width:280px;">
+                <h2 class="section-title fade-up" style="margin-bottom:24px;">Sobre mim</h2>
+                <p class="fade-up" style="font-size:clamp(0.95rem,2vw,1.1rem); font-weight:300; opacity:0.7; line-height:1.9; max-width:600px;">
+                    Olá, me chamo Laís.
                     <br><br>
-                    Meu trabalho é transformar sua trajetória em uma experiência visual de elite, unindo design de alto padrão e tecnologia de ponta para conectar sua marca pessoal ao topo do mercado.
+                    Meu trabalho é transformar sua trajetória em uma experiência visual de elite, unindo design de alto padrão e tecnologia de ponta.
                 </p>
             </div>
         </div>
     </section>
 
+    <!-- ===================== STACKS ===================== -->
     <section id="skills">
         <h2 class="section-title fade-up">Tech Stacks</h2>
         <div class="grid grid-cols-2 md:grid-cols-4 gap-8 justify-items-center" id="stacks-container">
-            <div class="stack-bubble"><span class="text-[10px] font-bold">REACT</span></div>
-            <div class="stack-bubble"><span class="text-[10px] font-bold">NODE.JS</span></div>
-            <div class="stack-bubble"><span class="text-[10px] font-bold">SQL</span></div>
-            <div class="stack-bubble"><span class="text-[10px] font-bold">UI/UX</span></div>
-            <div class="stack-bubble"><span class="text-[10px] font-bold">TAILWIND</span></div>
-            <div class="stack-bubble"><span class="text-[10px] font-bold">ZOD</span></div>
-            <div class="stack-bubble"><span class="text-[10px] font-bold">NEXT.JS</span></div>
+            <div class="stack-bubble"><span style="font-size:10px;font-weight:700;">REACT</span></div>
+            <div class="stack-bubble"><span style="font-size:10px;font-weight:700;">NODE.JS</span></div>
+            <div class="stack-bubble"><span style="font-size:10px;font-weight:700;">SQL</span></div>
+            <div class="stack-bubble"><span style="font-size:10px;font-weight:700;">UI/UX</span></div>
+            <div class="stack-bubble"><span style="font-size:10px;font-weight:700;">TAILWIND</span></div>
+            <div class="stack-bubble"><span style="font-size:10px;font-weight:700;">ZOD</span></div>
+            <div class="stack-bubble"><span style="font-size:10px;font-weight:700;">NEXT.JS</span></div>
         </div>
     </section>
 
+    <!-- ===================== GALERIA HORIZONTAL (desktop) ===================== -->
     <div id="galeria" class="horizontal-scroll-container">
         <div class="sticky-wrapper">
-            <h2 class="section-title fade-up" style="padding-left: 10%; margin-bottom: 20px;">Eventos </h2>
+            <h2 class="section-title fade-up" style="padding-left:10%; margin-bottom:20px;">Eventos</h2>
             <div class="gallery-track" id="gallery-track"></div>
         </div>
     </div>
 
+    <!-- ===================== GALERIA MOBILE ===================== -->
+    <div class="mobile-gallery" id="galeria-mobile">
+        <h2 class="section-title fade-up">Eventos</h2>
+        <div class="mobile-gallery-grid" id="mobile-gallery-grid"></div>
+    </div>
+
+    <!-- ===================== DECK ===================== -->
     <section id="deck" class="deck-section">
-        <h2 class="section-title fade-up text-center">Inspiration Deck</h2>
-        <p class="text-[10px] tracking-[4px] uppercase opacity-50 mb-10">Clique para abrir o baralho</p>
+        <h2 class="section-title fade-up" style="text-align:center;">Projetos</h2>
+        <p style="font-size:0.65rem; letter-spacing:4px; text-transform:uppercase; opacity:0.5; margin-bottom:10px;">Clique para abrir o baralho</p>
         <div class="deck-container" id="deckContainer"></div>
         <div class="deck-hint">Escolha uma carta para revelar</div>
     </section>
 
+    <!-- ===================== PARALLAX ===================== -->
     <section id="portfolio" class="parallax">
-        <h2 class="fade-up italic font-black text-3xl">CRIANDO O FUTURO HOJE</h2>
+        <h2 class="fade-up" style="font-style:italic; font-weight:900; font-size:clamp(1.4rem,4vw,2rem); text-align:center; padding:0 20px;">CRIANDO O FUTURO HOJE</h2>
     </section>
 
-    <section id="contact" class="pb-20">
+    <!-- ===================== CONTATO ===================== -->
+    <section id="contact" style="padding-bottom:80px;">
         <h2 class="section-title fade-up">Contato</h2>
-        <form id="whatsappForm" class="fade-up max-w-[600px] mx-auto flex flex-col gap-6">
-            <input type="text" id="name" placeholder="Seu Nome" required class="bg-transparent border-b border-zinc-800 p-4 outline-none focus:border-[#f80afc] transition">
-            <textarea id="message" rows="3" placeholder="Mensagem" required class="bg-transparent border-b border-zinc-800 p-4 outline-none focus:border-[#f80afc] transition"></textarea>
-            <button type="submit" class="bg-[#f80afc] text-white font-black p-4 uppercase tracking-widest text-xs">Enviar Mensagem</button>
+        <form id="whatsappForm" class="fade-up" style="max-width:560px; margin:0 auto; display:flex; flex-direction:column; gap:24px;">
+            <input type="text" id="name" placeholder="Seu Nome" required
+                style="background:transparent; border:none; border-bottom:1px solid #333; padding:16px 4px; outline:none; color:white; font-size:0.9rem; font-family:Montserrat,sans-serif; transition:border-color 0.3s; width:100%;"
+                onfocus="this.style.borderBottomColor='#f80afc'" onblur="this.style.borderBottomColor='#333'">
+            <textarea id="message" rows="4" placeholder="Mensagem" required
+                style="background:transparent; border:none; border-bottom:1px solid #333; padding:16px 4px; outline:none; color:white; font-size:0.9rem; font-family:Montserrat,sans-serif; resize:none; transition:border-color 0.3s; width:100%;"
+                onfocus="this.style.borderBottomColor='#f80afc'" onblur="this.style.borderBottomColor='#333'"></textarea>
+            <button type="submit"
+                style="background:#f80afc; color:white; font-weight:900; padding:16px; text-transform:uppercase; letter-spacing:4px; font-size:0.75rem; border:none; cursor:pointer; font-family:Montserrat,sans-serif; transition:opacity 0.3s;"
+                onmouseover="this.style.opacity='0.85'" onmouseout="this.style.opacity='1'">
+                Enviar Mensagem
+            </button>
         </form>
     </section>
 
     <footer>
-        <div class="text-[10px] opacity-40 uppercase tracking-widest">© 2026 Laís Arantes • Full Stack Developer</div>
+        <div style="font-size:10px; opacity:0.4; text-transform:uppercase; letter-spacing:3px;">© 2026 Laís Arantes • Full Stack Developer</div>
     </footer>
+
 </div>
 
 <script>
-// --- 1. GERAÇÃO DA GALERIA HORIZONTAL COM LINKS NO VERSO ---
+// ===================== HAMBURGER MENU =====================
+const hamburger = document.getElementById('hamburger');
+const mobileMenu = document.getElementById('mobile-menu');
+
+hamburger.addEventListener('click', (e) => {
+    e.stopPropagation();
+    hamburger.classList.toggle('open');
+    mobileMenu.classList.toggle('open');
+    document.body.style.overflow = mobileMenu.classList.contains('open') ? 'hidden' : '';
+});
+
+document.querySelectorAll('.mobile-nav-link, .mobile-whatsapp').forEach(link => {
+    link.addEventListener('click', () => {
+        hamburger.classList.remove('open');
+        mobileMenu.classList.remove('open');
+        document.body.style.overflow = '';
+    });
+});
+
+// ===================== GALERIA HORIZONTAL =====================
 const track = document.getElementById('gallery-track');
+const mobileGrid = document.getElementById('mobile-gallery-grid');
+
 const meusProjetos = [
-    { titulo: "DevDay", imagem: "img/foto5.png", imagemVerso: "img/foto8.png", link: "" },
-    { titulo: "Hackathon Ronald McDonald", imagem: "img/foto4.png", imagemVerso: "img/foto9.png", link: "" },
-    { titulo: "DevFest", imagem: "img/foto6.png", imagemVerso: "img/foto10.png", link: "" },
-    { titulo: "Front-End Day", imagem: "img/foto7.png", imagemVerso: "img/foto11.png", link: "" }
+    { titulo: "DevDay",                  imagem: "img/foto5.png",  imagemVerso: "img/foto8.png",  link: "" },
+    { titulo: "Hackathon Ronald McDonald", imagem: "img/foto4.png", imagemVerso: "img/foto9.png",  link: "" },
+    { titulo: "DevFest",                 imagem: "img/foto6.png",  imagemVerso: "img/foto10.png", link: "" },
+    { titulo: "Front-End Day",           imagem: "img/foto7.png",  imagemVerso: "img/foto11.png", link: "" }
 ];
 
 meusProjetos.forEach((projeto, index) => {
+    // Desktop card
     const item = document.createElement('div');
     item.className = 'gallery-item';
     item.innerHTML = `
         <div class="card-inner">
             <div class="card-front">
                 <img src="${projeto.imagem}" alt="${projeto.titulo}" onerror="this.src='https://picsum.photos/800/1000?sig=${index}'">
-                <div class="item-info-front">
-                    <h3>${projeto.titulo}</h3>
-                </div>
+                <div class="item-info-front"><h3>${projeto.titulo}</h3></div>
             </div>
             <a href="${projeto.link}" target="_blank" class="card-back">
                 <img src="${projeto.imagemVerso}" alt="${projeto.titulo} Detalhe" onerror="this.src='https://picsum.photos/800/1000?grayscale&sig=${index + 50}'">
             </a>
-        </div>
-    `;
+        </div>`;
     track.appendChild(item);
+
+    // Mobile card
+    const mItem = document.createElement('div');
+    mItem.className = 'mobile-gallery-item fade-up';
+    mItem.innerHTML = `
+        <img src="${projeto.imagem}" alt="${projeto.titulo}" onerror="this.src='https://picsum.photos/600/800?sig=${index}'">
+        <div class="mobile-gallery-item-label">${projeto.titulo}</div>`;
+    mobileGrid.appendChild(mItem);
 });
 
-// --- 2. LÓGICA DO BARALHO (DECK) ---
+// ===================== BARALHO (DECK) =====================
 const deckContainer = document.getElementById('deckContainer');
 const deckImages = [
     "./img/foto1.png",
     "./img/foto2.png",
-    "./img/foto3.png",
-  
-
-    
+    "./img/foto3.png"
 ];
 
 deckImages.forEach((imgSrc, i) => {
     const card = document.createElement('div');
     card.className = 'deck-card';
     card.style.zIndex = deckImages.length - i;
-    card.innerHTML = `<img src="${imgSrc}" alt="Mood ${i}">`;
-    
+    card.innerHTML = `<img src="${imgSrc}" alt="Mood ${i}" onerror="this.src='https://picsum.photos/500/600?sig=${i + 100}'">`;
+
     card.addEventListener('click', (e) => {
         e.stopPropagation();
-        if(!deckContainer.classList.contains('open')) {
+        if (!deckContainer.classList.contains('open')) {
             deckContainer.classList.add('open');
         } else {
             document.querySelectorAll('.deck-card').forEach(c => c.classList.remove('focused'));
@@ -428,7 +830,7 @@ document.addEventListener('click', () => {
     document.querySelectorAll('.deck-card').forEach(c => c.classList.remove('focused'));
 });
 
-// --- 3. CONTROLE DO HEADER E SCROLL ---
+// ===================== NAVBAR SCROLL BEHAVIOUR =====================
 const navLinks = document.getElementById('nav-links');
 const heroTrigger = document.getElementById('hero-trigger');
 const contactTrigger = document.getElementById('contact');
@@ -436,16 +838,18 @@ const galeriaSection = document.getElementById('galeria');
 const nav = document.getElementById('navbar');
 
 const menuObserver = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
+    entries.forEach(() => {
+        const heroVisible = heroTrigger.getBoundingClientRect().top < window.innerHeight &&
+                            heroTrigger.getBoundingClientRect().bottom > 0;
+        const contactVisible = contactTrigger.getBoundingClientRect().top < window.innerHeight &&
+                               contactTrigger.getBoundingClientRect().bottom > 0;
+        if (heroVisible || contactVisible) {
             navLinks.classList.add('active');
         } else {
-            const heroVisible = heroTrigger.getBoundingClientRect().top < window.innerHeight && heroTrigger.getBoundingClientRect().bottom > 0;
-            const contactVisible = contactTrigger.getBoundingClientRect().top < window.innerHeight && contactTrigger.getBoundingClientRect().bottom > 0;
-            if (!heroVisible && !contactVisible) navLinks.classList.remove('active');
+            navLinks.classList.remove('active');
         }
     });
-}, { threshold: 0.2 });
+}, { threshold: 0.1 });
 
 menuObserver.observe(heroTrigger);
 menuObserver.observe(contactTrigger);
@@ -457,23 +861,24 @@ const navHiddenObserver = new IntersectionObserver((entries) => {
     });
 }, { threshold: 0.1 });
 
-navHiddenObserver.observe(galeriaSection);
+if (galeriaSection) navHiddenObserver.observe(galeriaSection);
 
-// --- 4. OBSERVERS E ANIMAÇÕES ---
+// ===================== SCROLL HORIZONTAL =====================
 window.addEventListener('scroll', () => {
     const container = document.querySelector('.horizontal-scroll-container');
-    const track = document.getElementById('gallery-track');
-    if (!container) return;
-
-    const rect = container.getBoundingClientRect();
-    if (rect.top <= 0 && rect.bottom >= window.innerHeight) {
-        const progress = Math.abs(rect.top) / (container.offsetHeight - window.innerHeight);
-        const moveX = progress * (track.scrollWidth - window.innerWidth + (window.innerWidth * 0.1));
-        track.style.transform = `translateX(-${moveX}px)`;
+    const galleryTrack = document.getElementById('gallery-track');
+    if (container && galleryTrack) {
+        const rect = container.getBoundingClientRect();
+        if (rect.top <= 0 && rect.bottom >= window.innerHeight) {
+            const progress = Math.abs(rect.top) / (container.offsetHeight - window.innerHeight);
+            const moveX = progress * (galleryTrack.scrollWidth - window.innerWidth + (window.innerWidth * 0.1));
+            galleryTrack.style.transform = `translateX(-${moveX}px)`;
+        }
     }
     nav.classList.toggle('scrolled', window.scrollY > 50);
 });
 
+// ===================== INTERSECTION OBSERVERS =====================
 document.querySelectorAll('.gallery-item').forEach(item => {
     new IntersectionObserver((entries) => {
         if (entries[0].isIntersecting) entries[0].target.classList.add('active');
@@ -482,22 +887,27 @@ document.querySelectorAll('.gallery-item').forEach(item => {
 
 document.querySelectorAll('.fade-up').forEach(el => {
     new IntersectionObserver((entries) => {
-        if(entries[0].isIntersecting) el.classList.add('active');
-    }, {threshold: 0.15}).observe(el);
+        if (entries[0].isIntersecting) el.classList.add('active');
+    }, { threshold: 0.12 }).observe(el);
 });
 
-const stackObserver = new IntersectionObserver((entries) => {
-    if(entries[0].isIntersecting) {
-        document.querySelectorAll('.stack-bubble').forEach((b, i) => {
-            setTimeout(() => b.classList.add('show'), i * 100);
-        });
-    }
-}, { threshold: 0.5 });
-stackObserver.observe(document.querySelector('#skills'));
+const stackSection = document.querySelector('#skills');
+if (stackSection) {
+    new IntersectionObserver((entries) => {
+        if (entries[0].isIntersecting) {
+            document.querySelectorAll('.stack-bubble').forEach((b, i) => {
+                setTimeout(() => b.classList.add('show'), i * 100);
+            });
+        }
+    }, { threshold: 0.4 }).observe(stackSection);
+}
 
+// ===================== FORMULÁRIO WHATSAPP =====================
 document.getElementById('whatsappForm').addEventListener('submit', function(e) {
     e.preventDefault();
-    const texto = `Olá Laís! Meu nome é ${document.getElementById('name').value}. ${document.getElementById('message').value}`;
+    const nome = document.getElementById('name').value;
+    const msg = document.getElementById('message').value;
+    const texto = `Olá Laís! Meu nome é ${nome}. ${msg}`;
     window.open(`https://wa.me/5511982473573?text=${encodeURIComponent(texto)}`, '_blank');
 });
 </script>
